@@ -13,4 +13,11 @@ return {
     "morhetz/gruvbox",
     as = "gruvbox",
   },
+  {
+    "windwp/nvim-ts-autotag",
+    as = "nvim-ts-autotag",
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
 }
