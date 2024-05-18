@@ -46,7 +46,9 @@ return {
   },
 
   {
-    "morhetz/gruvbox",
+    "ellisonleao/gruvbox.nvim",
     as = "gruvbox",
+    priority = 1000,
+    config = true,
   },
 }
