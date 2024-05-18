@@ -44,14 +44,4 @@ return {
       })
     end,
   },
-
-  {
-    -- "morhetz/gruvbox",
-    -- branch = "master",
-    "ellisonleao/gruvbox.nvim",
-    branch = "main",
-    as = "gruvbox",
-    priority = 1000,
-    config = function() end,
-  },
 }
