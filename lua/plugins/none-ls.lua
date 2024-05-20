@@ -16,8 +16,8 @@ return {
       null_ls.builtins.formatting.stylua,
       -- null_ls.builtins.formatting.prettier,
       -- null_ls.builtins.formatting.prettierd,
-      require "none-ls.diagnostics.eslint_d",
-      require "none-ls.formatting.eslint_d",
+      -- require "none-ls.diagnostics.eslint_d",
+      -- require "none-ls.formatting.eslint_d",
     }
     return config -- return final config table
   end,
