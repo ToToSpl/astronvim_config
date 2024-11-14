@@ -47,6 +47,15 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      rust_analyzer = {
+        server = {
+          extraEnv = {
+            DYLD_FALLBACK_LIBRARY_PATH = "/Library/Developer/CommandLineTools/usr/lib",
+            LDFLAGS = "-L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib",
+            LD_LIBRARY_PATH = "/usr/local/lib",
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
