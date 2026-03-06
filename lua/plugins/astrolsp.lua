@@ -55,6 +55,55 @@ return {
             LD_LIBRARY_PATH = "/usr/local/lib",
           },
         },
+        settings = (function()
+          local ra = {
+            ["rust-analyzer"] = {
+              check = { command = "clippy" },
+              hover = {
+                memoryLayout = {
+                  niches = true,
+                  padding = "hexadecimal",
+                },
+              },
+              inlayHints = {
+                bindingModeHints = { enable = true },
+                closureCaptureHints = { enable = true },
+                closureReturnTypeHints = { enable = "with_block" },
+                discriminantHints = { enable = "always" },
+                expressionAdjustmentHints = { enable = "always", mode = "postfix" },
+                genericParameterHints = { lifetime = { enable = true }, type = { enable = true } },
+                implicitDrops = { enable = true },
+                implicitSizeBoundHints = { enable = true },
+                lifetimeElisionHints = { enable = "always", useParameterNames = true },
+                parameterHints = { missingArguments = { enable = true } },
+                rangeExclusiveHints = { enable = true },
+                reborrowHints = { enable = "always" },
+                typeHints = {
+                  hideClosureInitialization = true,
+                  hideInferredTypes = true,
+                  hideNamedConstructor = true,
+                },
+                renderColons = true,
+              },
+            },
+          }
+
+          -- checks if in root directory of the opened nvim there is .embedded file
+          -- inside there should be a target for given emmbedded device
+          -- if so analyzer will be using it
+          local Path = require "plenary.path"
+          local root = vim.fn.getcwd()
+          local embedded_file = Path:new(root, ".embedded")
+          if embedded_file:exists() then
+            local target = embedded_file:read():match "%S+" -- read first word in file
+            if target and target ~= "" then
+              ra["rust-analyzer"].cargo = { target = target }
+              vim.notify("rust-analyzer cargo.target set to: " .. target, vim.log.levels.INFO)
+            end
+          end
+
+          return ra
+        end)(),
       },
     },
     -- customize how language servers are attached
