@@ -56,7 +56,7 @@ return {
         settings = (function()
           local ra = {
             ["rust-analyzer"] = {
-              check = { command = "clippy" },
+              check = { command = "clippy", workspace = true },
               hover = {
                 memoryLayout = {
                   niches = true,
@@ -98,6 +98,7 @@ return {
           if embedded_file:exists() then
             local target = embedded_file:read():match "%S+" -- read first word in file
             if target and target ~= "" then
+              ra["rust-analyzer"].check.workspace = false
               ra["rust-analyzer"].cargo = { target = target }
               vim.notify("rust-analyzer cargo.target set to: " .. target, vim.log.levels.INFO)
             end
